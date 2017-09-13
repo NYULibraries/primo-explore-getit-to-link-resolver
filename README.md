@@ -17,29 +17,29 @@ Override the "availability links" section in brief and full results with a link 
 1. Assuming you've installed and are using [primo-explore-devenv](https://github.com/ExLibrisGroup/primo-explore-devenv).
 
 2. Navigate to your template/central package root directory. For example:
-  ```
-  cd primo-explore/custom/MY_VIEW_ID
-  ```
+    ```
+    cd primo-explore/custom/MY_VIEW_ID
+    ```
 3. If you do not already have a package.json file in this directory, create one:
-  ```
-  npm init -y
-  ```
+    ```
+    npm init -y
+    ```
 4. Install this package:
-  ```
-  npm install primo-explore-getit-to-link-resolver --save-dev
-  ```
+    ```
+    npm install primo-explore-getit-to-link-resolver --save-dev
+    ```
 
 ## Usage
 
 Once installed, inject `getitToLinkResolver` as a dependency:
 
-```
+```js
 let app = angular.module('viewCustom', ['getitToLinkResolver'])
 ```
 
 **Note:** If you're using the --browserify build option, you will need to first import the module with:
 
-```
+```js
 import 'primo-explore-getit-to-link-resolver';
 ```
 
@@ -49,7 +49,7 @@ This will hide all out-of-the-box availability links on the brief and full view.
 
 If you want the link resolver link in the brief results then add the `getit-to-link-resolver-brief` directive to the `prmSearchResultAvailabilityLineAfter` component:
 
-```
+```js
 app.component('prmSearchResultAvailabilityLineAfter', {
   template: '<getit-to-link-resolver-brief></getit-to-link-resolver-brief>'
 })
@@ -59,7 +59,7 @@ app.component('prmSearchResultAvailabilityLineAfter', {
 
 If you want the link resolver link in the full display then add the `getit-to-link-resolver-full` directive to the `prmOpacAfter` component:
 
-```
+```js
 app.component('prmOpacAfter', {
   template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
 })
@@ -67,7 +67,7 @@ app.component('prmOpacAfter', {
 
 If you want to fully hide the Get It section in the full display then do not implement the above component and add the following to your css:
 
-```
+```css
 [aria-label="Get It"],
 &[id^='getit_link1_'] {
   display: none;
@@ -87,7 +87,7 @@ You'll need to configure the module by passing it an object as an angular `const
 
 ### Example
 
-```
+```js
 app.constant('getitToLinkResolver', {
   linkField: 'openURL',
   linkText: 'Check Availability',
@@ -106,7 +106,7 @@ app.constant('getitToLinkResolver', {
 
 Finally you'll need to add the following lines to your CSS to stylize the colors:
 
-```
+```css
 .check-avail-link {
   color: getitColor;
   font-size: 18px;
