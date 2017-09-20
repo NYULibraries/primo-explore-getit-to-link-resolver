@@ -17,7 +17,6 @@ angular
   .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
     this.$onInit = function() {
       $scope.config = getitToLinkResolverService.config;
-      console.log(this.prmFullViewServiceContainer.service.title)
       if (this.prmFullViewServiceContainer.service.title == "nui.brief.results.tabs.send_to") {
         $scope.shouldAddGetItLink = () => true;
       }
