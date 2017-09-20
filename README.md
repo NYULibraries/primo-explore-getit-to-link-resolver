@@ -57,21 +57,12 @@ app.component('prmSearchResultAvailabilityLineAfter', {
 
 ### In full display
 
-If you want the link resolver link in the full display then add the `getit-to-link-resolver-full` directive to the `prmOpacAfter` component:
+If you want the link resolver link in the full display then add the `getit-to-link-resolver-full` directive to the `prmFullViewServiceContainerAfter` component:
 
 ```js
-app.component('prmOpacAfter', {
+app.component('prmFullViewServiceContainerAfter', {
   template: '<getit-to-link-resolver-full></getit-to-link-resolver-full>'
 })
-```
-
-If you want to fully hide the Get It section in the full display then do not implement the above component and add the following to your css:
-
-```css
-[aria-label="Get It"],
-&[id^='getit_link1_'] {
-  display: none;
-}
 ```
 
 ### Config
@@ -80,6 +71,7 @@ You'll need to configure the module by passing it an object as an angular `const
 
 | name | type | usage |
 |------|-------------|--------|
+| `serviceSectionHeader` | string | the section header for the full view section containing the link resolver link, e.g. "Get It" or '{nui.getit.tab1_check}' |
 | `linkField` | string | which link template from the record do you want to link to  |
 | `linkText` | string | the text for the link |
 | `iconBefore` | object | defines the icon for the link to come before the text. must be chosen from <https://material.io/icons/>. you need to specify both the name of the action "set" (see link) and the icon itself, in the form "ic_person_outline_24px". note that all icons do not work so you may have to experiment some |
@@ -89,6 +81,7 @@ You'll need to configure the module by passing it an object as an angular `const
 
 ```js
 app.constant('getitToLinkResolver', {
+  serviceSectionHeader: '{nui.getit.tab1_check}',
   linkField: 'openURL',
   linkText: 'Check Availability',
   iconBefore: {
@@ -104,11 +97,30 @@ app.constant('getitToLinkResolver', {
 
 ### Styles
 
-Finally you'll need to add the following lines to your CSS to stylize the colors:
+To stylize the availability link colors:
 
 ```css
 .check-avail-link {
   color: getitColor;
   font-size: 18px;
+}
+```
+
+To fully hide the out-of-the-box "Get It" section in the full display then do not implement the `prmFullViewServiceContainerAfter` component and add the following to your css:
+
+```css
+[aria-label="Get It"],
+&[id^='getit_link1_'] {
+  display: none;
+}
+```
+
+To hide all the default availability links on brief and full results add the following to your css:
+
+```css
+prm-brief-result-container prm-search-result-availability-line > *:not(:last-child),
+prm-full-view prm-search-result-availability-line > *:not(:last-child),
+prm-full-view prm-search-result-availability-line-after a.check-avail-link {
+  display: none;
 }
 ```
