@@ -101,8 +101,8 @@ To stylize the availability link colors:
 
 ```css
 .check-avail-link {
-  color: getitColor;
-  font-size: 18px;
+  color: green;
+  font-size: 18px !important;
 }
 ```
 
@@ -110,7 +110,7 @@ To fully hide the out-of-the-box "Get It" section in the full display then do no
 
 ```css
 [aria-label="Get It"],
-&[id^='getit_link1_'] {
+[id^='getit_link1_'] {
   display: none;
 }
 ```
