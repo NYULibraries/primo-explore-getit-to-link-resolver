@@ -1,10 +1,15 @@
 angular
+  // Define the module name
   .module('getitToLinkResolver', [])
+  // A reusable object for this module with our translate function
+  // and a convenience 'config' object
   .factory('getitToLinkResolverService', ['getitToLinkResolverConfig', '$filter', function(getitToLinkResolverConfig, $filter) {
     return {
+      // Use the translate filter to get values from the Primo Back Office
       translate: function(original) {
         return original.replace(/\{(.+)\}/g, (match, p1) => $filter('translate')(p1));
       },
+      // Set reusable config constants from the config element on the parent ng app
       config: {
         linkField: getitToLinkResolverConfig.linkField,
         linkText: getitToLinkResolverConfig.linkText,
@@ -14,13 +19,19 @@ angular
       }
     }
   }])
+  // Controller for below full-display component
   .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
     this.$onInit = function() {
+      // Get our config in this scope
       $scope.config = getitToLinkResolverService.config;
+      // Are we in the "send to" section? Then we're going to add our GetIt
+      // link right after it as a new section
       if (this.prmFullViewServiceContainer.service.title == "nui.brief.results.tabs.send_to") {
         $scope.shouldAddGetItLink = () => true;
       }
     };
+    // Retrieve the GetIt link from whichever field the config told us it's in
+    // note the different path for looking for links in full and brief displays
     $scope.getitLink = () => {
       try {
         return this.prmFullViewServiceContainer.item.delivery.link.filter(link => link["displayLabel"] == getitToLinkResolverService.config.linkField)[0]["linkURL"];
@@ -28,12 +39,18 @@ angular
         return '';
       }
     };
+    // Use the translate function in this scope
     $scope.translate = (original) => getitToLinkResolverService.translate(original);
   }])
+  // Controller for below brief-display component
   .controller('getitToLinkResolverBriefController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
     this.$onInit = function() {
+      // Get our config in this scope
       $scope.config = getitToLinkResolverService.config;
     };
+    // Retrieve the GetIt link from whichever field the config told us it's in
+    // note the different path for looking for links in full and brief displays
+    // Yes this needs to be DRYed up
     $scope.getitLink = () => {
       try {
         return this.prmBriefResultContainer.item.link[getitToLinkResolverService.config.linkField];
@@ -41,13 +58,19 @@ angular
         return '';
       }
     };
+    // Use the translate function in this scope
     $scope.translate = (original) => getitToLinkResolverService.translate(original);
   }])
+  // Component to add to the full display page
   .component('getitToLinkResolverFull', {
+    // Include the full view service container controller
+    // it's where the getit link will be found
     require: {
       prmFullViewServiceContainer: '^prmFullViewServiceContainer'
     },
+    // Use the above controller
     controller: 'getitToLinkResolverFullController',
+    // Setup a new section copying the markup from previous sections
     template: `<div ng-if="shouldAddGetItLink()">
                 <div class="section-head">
                     <div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
@@ -65,13 +88,19 @@ angular
                 </div>
               </div>
     `
-
   })
+  // Component to add to the brief display page
   .component('getitToLinkResolverBrief', {
+    // Include the brief result container controller
+    // it's where the getit link will be found for the brief result
     require: {
       prmBriefResultContainer: '^prmBriefResultContainer'
     },
+    // Use the above controller
     controller: 'getitToLinkResolverBriefController',
+    // Setup a new link to include after the brief result copying existing markup
+    // classes like "md-button neutralized-button" allow it to function like a
+    // button, i.e. not display strangely and be clickable
     template: `
               <a ng-href="{{ getitLink() }}" class="md-button md-primoExplore-theme md-ink-ripple neutralized-button arrow-link check-avail-link check-avail-link-brief" target="_blank">
                 <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
