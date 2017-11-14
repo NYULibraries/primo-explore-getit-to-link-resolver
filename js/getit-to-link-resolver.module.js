@@ -56,14 +56,12 @@ angular
                     </div>
                 </div>
                 <div class="section-body">
-                <button class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple">
-                  <a ng-href="{{ getitLink() }}" class="arrow-link check-avail-link check-avail-link-full" target="_blank">
-                    <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
-                    {{ translate(config.linkText) }}
-                    <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
-                    <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-                  </a>
-                </button>
+                <a ng-href="{{ getitLink() }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
+                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
+                  {{ translate(config.linkText) }}
+                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
+                  <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
+                </a>
                 </div>
               </div>
     `
@@ -75,13 +73,11 @@ angular
     },
     controller: 'getitToLinkResolverBriefController',
     template: `
-              <button class="neutralized-button arrow-link-button md-button md-primoExplore-theme md-ink-ripple">
-                <a ng-href="{{ getitLink() }}" class="arrow-link check-avail-link check-avail-link-brief" target="_blank">
-                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
-                   {{ translate(config.linkText) }}
-                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
-                  <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-                </a>
-              </button>
+              <a ng-href="{{ getitLink() }}" class="md-button md-primoExplore-theme md-ink-ripple neutralized-button arrow-link check-avail-link check-avail-link-brief" target="_blank">
+                <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
+                 {{ translate(config.linkText) }}
+                <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
+                <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
+              </a>
     `
   });
