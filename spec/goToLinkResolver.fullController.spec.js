@@ -58,7 +58,7 @@ describe('getitToLinkResolverFullController', () => {
     it("should assign shouldAddGetItLink function when in the 'send to' section", () => {
       controllerInSendTo.$onInit();
 
-      $sendToScope.shouldAddGetItLink.toBeDefined();
+      expect($sendToScope.shouldAddGetItLink).toBeDefined();
       expect($sendToScope.shouldAddGetItLink()).toBe(true);
     });
   });
