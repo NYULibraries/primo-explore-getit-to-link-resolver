@@ -17,7 +17,7 @@ angular
         iconAfter: getitToLinkResolverConfig.iconAfter,
         serviceSectionHeader: getitToLinkResolverConfig.serviceSectionHeader
       }
-    }
+    };
   }])
   // Controller for below full-display component
   .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
