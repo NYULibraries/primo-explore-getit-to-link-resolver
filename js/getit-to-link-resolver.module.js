@@ -21,12 +21,13 @@ angular
   }])
   // Controller for below full-display component
   .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
-    this.$onInit = function() {
+    const ctrl = this;
+    ctrl.$onInit = function() {
       // Get our config in this scope
       $scope.config = getitToLinkResolverService.config;
       // Are we in the "send to" section? Then we're going to add our GetIt
       // link right after it as a new section
-      if (this.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to") {
+      if (ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to") {
         $scope.shouldAddGetItLink = () => true;
       }
     };
@@ -34,7 +35,7 @@ angular
     // note the different path for looking for links in full and brief displays
     $scope.getitLink = () => {
       try {
-        return this.prmFullViewServiceContainer.item.delivery.link.filter(link =>
+        return ctrl.prmFullViewServiceContainer.item.delivery.link.filter(link =>
           link["displayLabel"] === getitToLinkResolverService.config.linkField
         )[0]["linkURL"];
       } catch (e) {
@@ -46,8 +47,8 @@ angular
   }])
   // Controller for below brief-display component
   .controller('getitToLinkResolverBriefController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
-    this.$onInit = function() {
-      debugger;
+    const ctrl = this;
+    ctrl.$onInit = function() {
       // Get our config in this scope
       $scope.config = getitToLinkResolverService.config;
     };
@@ -56,7 +57,7 @@ angular
     // Yes this needs to be DRYed up
     $scope.getitLink = () => {
       try {
-        return this.prmBriefResultContainer.item.link[getitToLinkResolverService.config.linkField];
+        return ctrl.prmBriefResultContainer.item.link[$scope.config.linkField];
       } catch (e) {
         return '';
       }
