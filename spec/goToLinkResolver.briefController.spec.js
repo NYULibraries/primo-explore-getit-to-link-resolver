@@ -1,7 +1,7 @@
 const getitToLinkResolverConfig = __fixtures__['getitToLinkResolverConfig'];
 
 describe('getitToLinkResolverBriefController', () => {
-  let $componentController, $scope, $filter;
+  let $componentController, $scope;
   let controller;
   let emptyBindings;
   let translateSpy;
@@ -22,10 +22,9 @@ describe('getitToLinkResolverBriefController', () => {
     })
   );
 
-  beforeEach(inject(function(_$rootScope_, _$componentController_, _$filter_) {
+  beforeEach(inject(function(_$rootScope_, _$componentController_) {
     $scope = _$rootScope_;
     $componentController = _$componentController_;
-    $filter = _$filter_;
 
     emptyBindings = {
       prmBriefResultContainer: {
