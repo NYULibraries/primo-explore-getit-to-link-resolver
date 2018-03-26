@@ -46,29 +46,28 @@ describe('getitToLinkResolverBriefController', () => {
       controller.$onInit();
       expect($scope.config).toEqual(getitToLinkResolverConfig);
     });
-  });
+    describe('getitLink', () => {
+      it('should be defined on the scope', () => {
+        controller.$onInit();
+        expect($scope.getitLink).toBeDefined();
+      });
 
-  describe('getitLink', () => {
-    it('should be defined on the scope', () => {
-      expect($scope.getitLink).toBeDefined();
-    });
-
-    it('should retreive GetIt link based on the config', () => {
-      const getItBindings = angular.copy(emptyBindings);
-      getItBindings.prmBriefResultContainer.item.link = {
+      it('should retreive GetIt link based on the config', () => {
+        const getItBindings = angular.copy(emptyBindings);
+        getItBindings.prmBriefResultContainer.item.link = {
           [getitToLinkResolverConfig.linkField]: 'url found!'
-      };
+        };
 
-      const $getItScope = $scope.$new();
-      const getItController = $componentController(
-        'getitToLinkResolverBrief',
-        { $scope: $getItScope },
-        getItBindings
-      );
+        const $getItScope = $scope.$new();
+        const getItController = $componentController(
+          'getitToLinkResolverBrief',
+          { $scope: $getItScope },
+          getItBindings
+        );
 
-
-      getItController.$onInit();
-      expect($getItScope.getitLink()).toEqual("url found!");
+        getItController.$onInit();
+        expect($getItScope.getitLink).toEqual("url found!");
+      });
     });
   });
 

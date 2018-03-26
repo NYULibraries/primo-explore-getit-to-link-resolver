@@ -27,21 +27,20 @@ angular
       $scope.config = getitToLinkResolverService.config;
       // Are we in the "send to" section? Then we're going to add our GetIt
       // link right after it as a new section
-      if (ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to") {
-        $scope.shouldAddGetItLink = () => true;
-      }
+      $scope.shouldAddGetItLink = ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to";
+
+      $scope.getitLink = (() => {
+        try {
+          return ctrl.prmFullViewServiceContainer.item.delivery.link.filter(link =>
+            link["displayLabel"] === getitToLinkResolverService.config.linkField
+          )[0]["linkURL"];
+        } catch (e) {
+          return '#';
+        }
+      })() || '#';
     };
     // Retrieve the GetIt link from whichever field the config told us it's in
     // note the different path for looking for links in full and brief displays
-    $scope.getitLink = () => {
-      try {
-        return ctrl.prmFullViewServiceContainer.item.delivery.link.filter(link =>
-          link["displayLabel"] === getitToLinkResolverService.config.linkField
-        )[0]["linkURL"];
-      } catch (e) {
-        return '';
-      }
-    };
     // Use the translate function in this scope
     $scope.translate = (original) => getitToLinkResolverService.translate(original);
   }])
@@ -51,17 +50,17 @@ angular
     ctrl.$onInit = function() {
       // Get our config in this scope
       $scope.config = getitToLinkResolverService.config;
+      $scope.getitLink = (() => {
+        try {
+          return ctrl.prmBriefResultContainer.item.link[$scope.config.linkField];
+        } catch (e) {
+          return '';
+        }
+      })() || '#';
     };
     // Retrieve the GetIt link from whichever field the config told us it's in
     // note the different path for looking for links in full and brief displays
     // Yes this needs to be DRYed up
-    $scope.getitLink = () => {
-      try {
-        return ctrl.prmBriefResultContainer.item.link[$scope.config.linkField];
-      } catch (e) {
-        return '';
-      }
-    };
     // Use the translate function in this scope
     $scope.translate = (original) => getitToLinkResolverService.translate(original);
   }])
@@ -75,7 +74,7 @@ angular
     // Use the above controller
     controller: 'getitToLinkResolverFullController',
     // Setup a new section copying the markup from previous sections
-    template: `<div ng-if="shouldAddGetItLink()">
+    template: `<div ng-if="shouldAddGetItLink">
                 <div class="section-head">
                     <div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
                       <h4 class="section-title md-title light-text">{{translate(config.serviceSectionHeader)}}</h4>
@@ -83,7 +82,7 @@ angular
                     </div>
                 </div>
                 <div class="section-body">
-                <a ng-href="{{ getitLink() }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
+                <a ng-href="{{ getitLink }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
                   <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
                   {{ translate(config.linkText) }}
                   <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
@@ -106,7 +105,7 @@ angular
     // classes like "md-button neutralized-button" allow it to function like a
     // button, i.e. not display strangely and be clickable
     template: `
-              <a ng-href="{{ getitLink() }}" class="md-button md-primoExplore-theme md-ink-ripple neutralized-button arrow-link check-avail-link check-avail-link-brief" target="_blank">
+              <a ng-href="{{ getitLink }}" class="md-button md-primoExplore-theme md-ink-ripple neutralized-button arrow-link check-avail-link check-avail-link-brief" target="_blank">
                 <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
                  {{ translate(config.linkText) }}
                 <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>

@@ -53,7 +53,8 @@ describe('getitToLinkResolverFullController', () => {
       sendToBindings.prmFullViewServiceContainer.service.title = "nui.brief.results.tabs.send_to";
 
       controller.$onInit();
-      expect($scope.shouldAddGetItLink).not.toBeDefined();
+      expect($scope.shouldAddGetItLink).toBeDefined();
+      expect($scope.shouldAddGetItLink).toBe(false);
 
       const $sendToScope = $scope.$new();
       const controllerInSendTo = $componentController(
@@ -64,38 +65,40 @@ describe('getitToLinkResolverFullController', () => {
 
       controllerInSendTo.$onInit();
       expect($sendToScope.shouldAddGetItLink).toBeDefined();
-      expect($sendToScope.shouldAddGetItLink()).toBe(true);
+      expect($sendToScope.shouldAddGetItLink).toBe(true);
     });
 
+    describe('getitLink', () => {
+      it('should be defined on the scope', () => {
+        controller.$onInit();
+        expect($scope.getitLink).toBeDefined();
+      });
+
+      it('should retreive GetIt link based on the config', () => {
+        const getItBindings = angular.copy(emptyBindings);
+        getItBindings.prmFullViewServiceContainer.item = {
+          delivery: {
+            link: [{
+              displayLabel: "openURL",
+              linkURL: "url found!"
+            }]
+          }
+        };
+
+        const $getItScope = $scope.$new();
+        const getItController = $componentController(
+          'getitToLinkResolverFull',
+          { $scope: $getItScope },
+          getItBindings
+        );
+
+        getItController.$onInit();
+        expect($getItScope.getitLink).toEqual("url found!");
+      });
+    });
+    
   });
 
-  describe('getitLink', () => {
-    it('should be defined on the scope', () => {
-      expect($scope.getitLink).toBeDefined();
-    });
-
-    it('should retreive GetIt link based on the config', () => {
-      const getItBindings = angular.copy(emptyBindings);
-      getItBindings.prmFullViewServiceContainer.item = {
-        delivery: {
-          link: [{
-            displayLabel: "openURL",
-            linkURL: "url found!"
-          }]
-        }
-      };
-
-      const $getItScope = $scope.$new();
-      const getItController = $componentController(
-        'getitToLinkResolverFull',
-        { $scope: $getItScope },
-        getItBindings
-      );
-
-      getItController.$onInit();
-      expect($getItScope.getitLink()).toEqual("url found!");
-    });
-  });
 
   describe('translate', () => {
     it('should be defined on $scope', () => {
