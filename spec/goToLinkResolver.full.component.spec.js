@@ -40,13 +40,43 @@ describe('getitToLinkResolverFull component', () => {
 
   describe('template layout', () => {
     it('should be wrapped in ng-if directive div', () => {
-      element;
       const ngIf = element.children()[0];
       expect(ngIf.tagName).toEqual('DIV');
       expect(ngIf.attributes[0].name).toEqual('ng-if');
     });
   });
 
-  describe('icons', () => {});
+  describe('icons', () => {
+    it('should appropriately map specified before icon', () => {
+      const iconBefore = getitToLinkResolverConfig.iconBefore;
+      const icons = Array.from(element.find('prm-icon'));
+
+      const matches = icons.reduce((acc, icn) => {
+        if (icn.getAttribute('icon-definition') === iconBefore.icon &&
+          icn.getAttribute('svg-icon-set') === iconBefore.set) {
+          return acc + 1;
+        } else {
+          return acc;
+        }
+      }, 0);
+
+      expect(matches).toEqual(1);
+    });
+
+    it('should appropriately map specified after icon', () => {
+      const iconAfter = getitToLinkResolverConfig.iconAfter;
+      const icons = Array.from(element.find('prm-icon'));
+      const matches = icons.reduce((acc, icn) => {
+        if (icn.getAttribute('icon-definition') === iconAfter.icon &&
+            icn.getAttribute('svg-icon-set') === iconAfter.set) {
+          return acc + 1;
+        } else {
+          return acc;
+        }
+      }, 0);
+
+      expect(matches).toEqual(1);
+    });
+  });
 
 });

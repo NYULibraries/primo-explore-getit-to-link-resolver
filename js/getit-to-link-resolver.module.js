@@ -54,7 +54,7 @@ angular
         try {
           return ctrl.prmBriefResultContainer.item.link[$scope.config.linkField];
         } catch (e) {
-          return '';
+          return '#';
         }
       })() || '#';
     };
