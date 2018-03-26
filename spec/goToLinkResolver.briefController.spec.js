@@ -1,16 +1,5 @@
 const getitToLinkResolverConfig = __fixtures__['getitToLinkResolverConfig'];
 
-/** SIMPLIFIED FUNCTION FOR DEEP CLONING **/
-function copy(aObject) {
-  var bObject, v, k;
-  bObject = Array.isArray(aObject) ? [] : {};
-  for (k in aObject) {
-    v = aObject[k];
-    bObject[k] = (typeof v === "object") ? copy(v) : v;
-  }
-  return bObject;
-}
-
 describe('getitToLinkResolverBriefController', () => {
   let $componentController, $scope;
   let controller;
@@ -65,7 +54,7 @@ describe('getitToLinkResolverBriefController', () => {
     });
 
     it('should retreive GetIt link based on the config', () => {
-      const getItBindings = copy(emptyBindings);
+      const getItBindings = angular.copy(emptyBindings);
       getItBindings.prmBriefResultContainer.item.link = {
           [getitToLinkResolverConfig.linkField]: 'url found!'
       };
