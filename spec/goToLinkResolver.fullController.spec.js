@@ -2,11 +2,8 @@ const getitToLinkResolverConfig = __fixtures__['getitToLinkResolverConfig'];
 
 describe('getitToLinkResolverFullController', () => {
   let $componentController, $scope;
-  let controller;
-  let emptyBindings;
+
   let translateSpy;
-
-
   beforeEach(() => {
     translateSpy = { translate: orig => orig };
     spyOn(translateSpy, 'translate');
@@ -22,6 +19,7 @@ describe('getitToLinkResolverFullController', () => {
     );
   }));
 
+  let controller, emptyBindings;
   beforeEach(inject(function(_$rootScope_, _$componentController_) {
     $scope = _$rootScope_;
     $componentController = _$componentController_;
@@ -96,7 +94,7 @@ describe('getitToLinkResolverFullController', () => {
         expect($getItScope.getitLink).toEqual("url found!");
       });
     });
-    
+
   });
 
 
