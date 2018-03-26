@@ -1,5 +1,16 @@
 const getitToLinkResolverConfig = __fixtures__['getitToLinkResolverConfig'];
 
+/** SIMPLIFIED FUNCTION FOR DEEP CLONING **/
+function copy(aObject) {
+  var bObject, v, k;
+  bObject = Array.isArray(aObject) ? [] : {};
+  for (k in aObject) {
+    v = aObject[k];
+    bObject[k] = (typeof v === "object") ? copy(v) : v;
+  }
+  return bObject;
+}
+
 describe('getitToLinkResolverFullController', () => {
   let $componentController, $scope;
   let controller;
@@ -18,9 +29,9 @@ describe('getitToLinkResolverFullController', () => {
       () => ({
         translate: translateSpy.translate,
         config: {...getitToLinkResolverConfig}
-      }));
-    })
-  );
+      })
+    );
+  }));
 
   beforeEach(inject(function(_$rootScope_, _$componentController_) {
     $scope = _$rootScope_;
@@ -28,7 +39,7 @@ describe('getitToLinkResolverFullController', () => {
 
     emptyBindings = {
       prmFullViewServiceContainer: {
-        service: { },
+        service: {},
         item: {
           delivery: {}
         }
@@ -49,8 +60,11 @@ describe('getitToLinkResolverFullController', () => {
     });
 
     it("should assign shouldAddGetItLink function when in the 'send to' section", () => {
-      const sendToBindings = {...emptyBindings};
+      const sendToBindings = copy(emptyBindings);
       sendToBindings.prmFullViewServiceContainer.service.title = "nui.brief.results.tabs.send_to";
+
+      controller.$onInit();
+      expect($scope.shouldAddGetItLink).not.toBeDefined();
 
       const $sendToScope = $scope.$new();
       const controllerInSendTo = $componentController(
@@ -60,10 +74,10 @@ describe('getitToLinkResolverFullController', () => {
       );
 
       controllerInSendTo.$onInit();
-
       expect($sendToScope.shouldAddGetItLink).toBeDefined();
       expect($sendToScope.shouldAddGetItLink()).toBe(true);
     });
+
   });
 
   describe('getitLink', () => {
@@ -72,7 +86,7 @@ describe('getitToLinkResolverFullController', () => {
     });
 
     it('should retreive GetIt link based on the config', () => {
-      const getItBindings = {...emptyBindings};
+      const getItBindings = copy(emptyBindings);
       getItBindings.prmFullViewServiceContainer.item = {
         delivery: {
           link: [{
