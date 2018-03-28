@@ -1,5 +1,8 @@
 # primo-explore-getit-to-link-resolver
 
+[![Build Status](https://travis-ci.org/NYULibraries/primo-explore-getit-to-link-resolver.svg?branch=master)](https://travis-ci.org/NYULibraries/primo-explore-getit-to-link-resolver)
+[![npm version](https://img.shields.io/npm/v/primo-explore-getit-to-link-resolver.svg)](https://www.npmjs.com/package/primo-explore-getit-to-link-resolver)
+
 ## Description
 
 Override the "availability links" section in brief and full results with a link to your link resolver.
