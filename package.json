@@ -2,7 +2,7 @@
   "name": "primo-explore-getit-to-link-resolver",
   "version": "2.0.3",
   "description": "ExLibris Primo New UI plugin for hiding availability links and replacing them with a configurable link to your link resolver",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nyulibraries/primo-explore-getit-to-link-resolver.git"
@@ -20,6 +20,7 @@
     "@babel/polyfill": "^7.0.0-beta.42",
     "angular": "^1.6.9",
     "angular-mocks": "^1.6.9",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -38,6 +39,8 @@
   },
   "scripts": {
     "test": "karma start --single-run",
-    "test:chrome-debugger": "karma start --browsers=Chrome --single-run=false --debug"
+    "test:chrome-debugger": "karma start --browsers=Chrome --single-run=false --debug",
+    "build": "yarn babel src --out-dir dist --ignore *.spec.js,coverage",
+    "prepare": "BABEL_ENV=production yarn build"
   }
 }

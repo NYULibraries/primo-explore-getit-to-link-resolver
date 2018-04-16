@@ -1,1 +1,6 @@
-coverage/
+src/
+.eslintrc
+.babelrc
+.travis.yml
+karma.conf.js
+screeshot*
