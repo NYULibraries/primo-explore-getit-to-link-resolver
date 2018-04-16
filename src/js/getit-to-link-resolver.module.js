@@ -1,72 +1,23 @@
+// html templates
 import getitToLinkResolverFull from '../html/getitToLinkResolverFull.html';
 import getitToLinkResolverBrief from '../html/getitToLinkResolverBrief.html';
+
+// controllers
+import getitToLinkResolverFullController from './controllers/getitToLinkResolverFullController.js';
+import getitToLinkResolverBriefController from './controllers/getitToLinkResolverBriefController.js';
+
+import getitToLinkResolverService from './services/getitToLinkResolverService.js';
 
 angular
   // Define the module name
   .module('getitToLinkResolver', [])
   // A reusable object for this module with our translate function
   // and a convenience 'config' object
-  .factory('getitToLinkResolverService', ['getitToLinkResolverConfig', '$filter', function(getitToLinkResolverConfig, $filter) {
-    return {
-      // Use the translate filter to get values from the Primo Back Office
-      translate: function(original) {
-        return original.replace(/\{(.+)\}/g, (match, p1) => $filter('translate')(p1));
-      },
-      // Set reusable config constants from the config element on the parent ng app
-      config: {
-        linkField: getitToLinkResolverConfig.linkField,
-        linkText: getitToLinkResolverConfig.linkText,
-        iconBefore: getitToLinkResolverConfig.iconBefore,
-        iconAfter: getitToLinkResolverConfig.iconAfter,
-        serviceSectionHeader: getitToLinkResolverConfig.serviceSectionHeader
-      }
-    };
-  }])
+  .factory('getitToLinkResolverService', ['getitToLinkResolverConfig', '$filter', getitToLinkResolverService])
   // Controller for below full-display component
-  .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
-    const ctrl = this;
-    ctrl.$onInit = function() {
-      // Get our config in this scope
-      $scope.config = getitToLinkResolverService.config;
-      // Are we in the "send to" section? Then we're going to add our GetIt
-      // link right after it as a new section
-      $scope.shouldAddGetItLink = ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to";
-
-      $scope.getitLink = (() => {
-        try {
-          return ctrl.prmFullViewServiceContainer.item.delivery.link.filter(link =>
-            link["displayLabel"] === getitToLinkResolverService.config.linkField
-          )[0]["linkURL"];
-        } catch (e) {
-          return '#';
-        }
-      })() || '#';
-    };
-    // Retrieve the GetIt link from whichever field the config told us it's in
-    // note the different path for looking for links in full and brief displays
-    // Use the translate function in this scope
-    $scope.translate = (original) => getitToLinkResolverService.translate(original);
-  }])
+  .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', getitToLinkResolverFullController])
   // Controller for below brief-display component
-  .controller('getitToLinkResolverBriefController', ['getitToLinkResolverService', '$scope', function(getitToLinkResolverService, $scope) {
-    const ctrl = this;
-    ctrl.$onInit = function() {
-      // Get our config in this scope
-      $scope.config = getitToLinkResolverService.config;
-      $scope.getitLink = (() => {
-        try {
-          return ctrl.prmBriefResultContainer.item.link[$scope.config.linkField];
-        } catch (e) {
-          return '#';
-        }
-      })() || '#';
-    };
-    // Retrieve the GetIt link from whichever field the config told us it's in
-    // note the different path for looking for links in full and brief displays
-    // Yes this needs to be DRYed up
-    // Use the translate function in this scope
-    $scope.translate = (original) => getitToLinkResolverService.translate(original);
-  }])
+  .controller('getitToLinkResolverBriefController', ['getitToLinkResolverService', '$scope', getitToLinkResolverBriefController])
   // Component to add to the full display page
   .component('getitToLinkResolverFull', {
     // Include the full view service container controller

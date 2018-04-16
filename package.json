@@ -22,6 +22,7 @@
     "angular-mocks": "^1.6.9",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-plugin-istanbul": "^4.1.6",
     "babel-plugin-transform-html-import-to-string": "^0.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -36,7 +37,9 @@
     "karma-json-fixtures-preprocessor": "^0.0.6",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "^0.0.32"
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^3.0.0",
+    "webpack": "^4.5.0"
   },
   "scripts": {
     "test": "karma start --single-run",
