@@ -1,3 +1,6 @@
+import getitToLinkResolverFull from '../html/getitToLinkResolverFull.html';
+import getitToLinkResolverBrief from '../html/getitToLinkResolverBrief.html';
+
 angular
   // Define the module name
   .module('getitToLinkResolver', [])
@@ -74,23 +77,7 @@ angular
     // Use the above controller
     controller: 'getitToLinkResolverFullController',
     // Setup a new section copying the markup from previous sections
-    template: `<div ng-if="shouldAddGetItLink">
-                <div class="section-head">
-                    <div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
-                      <h4 class="section-title md-title light-text">{{translate(config.serviceSectionHeader)}}</h4>
-                      <md-divider flex="" class="md-primoExplore-theme flex"></md-divider>
-                    </div>
-                </div>
-                <div class="section-body">
-                <a ng-href="{{ getitLink }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
-                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
-                  {{ translate(config.linkText) }}
-                  <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
-                  <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-                </a>
-                </div>
-              </div>
-    `
+    template: getitToLinkResolverFull
   })
   // Component to add to the brief display page
   .component('getitToLinkResolverBrief', {
@@ -104,12 +91,5 @@ angular
     // Setup a new link to include after the brief result copying existing markup
     // classes like "md-button neutralized-button" allow it to function like a
     // button, i.e. not display strangely and be clickable
-    template: `
-              <a ng-href="{{ getitLink }}" class="md-button md-primoExplore-theme md-ink-ripple neutralized-button arrow-link check-avail-link check-avail-link-brief" target="_blank">
-                <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
-                 {{ translate(config.linkText) }}
-                <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
-                <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-              </a>
-    `
+    template: getitToLinkResolverBrief
   });
