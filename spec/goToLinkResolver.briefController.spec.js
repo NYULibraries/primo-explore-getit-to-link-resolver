@@ -42,7 +42,7 @@ describe('getitToLinkResolverBriefController', () => {
   }));
 
   describe('$onInit', () => {
-    it("should assign ResovlerService's config to scope", () => {
+    it("should assign ResolverService's config to scope", () => {
       controller.$onInit();
       expect($scope.config).toEqual(getitToLinkResolverConfig);
     });
