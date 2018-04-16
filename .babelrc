@@ -1,5 +1,15 @@
 {
   "presets": ["es2015"],
-  "plugins": ["transform-object-rest-spread", "istanbul"],
-  "sourceMaps": "both"
+  "sourceMaps": "both",
+  "plugins": [
+    "babel-plugin-transform-html-import-to-string"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-object-rest-spread",
+        "istanbul"
+      ]
+    },
+  }
 }
