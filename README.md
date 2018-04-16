@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/NYULibraries/primo-explore-getit-to-link-resolver.svg?branch=master)](https://travis-ci.org/NYULibraries/primo-explore-getit-to-link-resolver)
 [![npm version](https://img.shields.io/npm/v/primo-explore-getit-to-link-resolver.svg)](https://www.npmjs.com/package/primo-explore-getit-to-link-resolver)
+[![Coverage Status](https://coveralls.io/repos/github/NYULibraries/primo-explore-getit-to-link-resolver/badge.svg?branch=master)](https://coveralls.io/github/NYULibraries/primo-explore-getit-to-link-resolver?branch=master)
 
 ## Description
 
