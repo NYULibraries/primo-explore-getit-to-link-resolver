@@ -20,6 +20,11 @@ describe('getitToLinkResolverService', () => {
       const translated = getitToLinkResolverService.translate('My {CONFIG_VALUE} value');
       expect(translated).toEqual("My CONFIG_VALUE! value");
     });
+
+    it('should translate multiple curly braces', () => {
+      const translated = getitToLinkResolverService.translate('My {CONFIG_VALUE} value {CONFIG_VALUE}');
+      expect(translated).toEqual("My CONFIG_VALUE! value CONFIG_VALUE!");
+    });
   });
 
   describe('config', () => {
