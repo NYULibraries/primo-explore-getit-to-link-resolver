@@ -1,3 +1,7 @@
 .getit-link-container {
-  padding: 20px 0;
+  margin: 20px 0;
+}
+
+.getit-to-link-resolver-full-container {
+  margin: 2em 0;
 }
