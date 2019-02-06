@@ -48,7 +48,7 @@ describe('getitToLinkResolverFullController', () => {
 
     it("should assign shouldAddGetItLink function when in the 'send to' section", () => {
       const sendToBindings = angular.copy(emptyBindings);
-      sendToBindings.prmFullViewServiceContainer.service.title = "nui.brief.results.tabs.send_to";
+      sendToBindings.prmFullViewServiceContainer.service.title = "nui.brief.results.tabs.links";
 
       controller.$onInit();
       expect($scope.shouldAddGetItLink).toBeDefined();

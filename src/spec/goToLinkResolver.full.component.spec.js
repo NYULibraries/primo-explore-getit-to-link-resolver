@@ -26,7 +26,7 @@ describe('getitToLinkResolverFull component', () => {
 
     const parentCtrl = {
       service: {
-        title: "nui.brief.results.tabs.send_to"
+        title: "nui.brief.results.tabs.links"
       }
     };
 

@@ -5,7 +5,7 @@ export default function(getitToLinkResolverService, $scope) {
     $scope.config = getitToLinkResolverService.config;
     // Are we in the "send to" section? Then we're going to add our GetIt
     // link right after it as a new section
-    $scope.shouldAddGetItLink = ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.send_to";
+    $scope.shouldAddGetItLink = ctrl.prmFullViewServiceContainer.service.title === "nui.brief.results.tabs.links";
 
     $scope.getitLink = (() => {
       try {
