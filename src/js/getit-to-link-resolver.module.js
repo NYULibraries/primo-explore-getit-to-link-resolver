@@ -15,7 +15,7 @@ angular
   // and a convenience 'config' object
   .factory('getitToLinkResolverService', ['getitToLinkResolverConfig', '$filter', getitToLinkResolverService])
   // Controller for below full-display component
-  .controller('getitToLinkResolverFullController', ['getitToLinkResolverService', '$scope', getitToLinkResolverFullController])
+  .controller('getitToLinkResolverFullController', getitToLinkResolverFullController)
   // Controller for below brief-display component
   .controller('getitToLinkResolverBriefController', ['getitToLinkResolverService', '$scope', getitToLinkResolverBriefController])
   // Component to add to the full display page
@@ -23,7 +23,8 @@ angular
     // Include the full view service container controller
     // it's where the getit link will be found
     require: {
-      prmFullViewServiceContainer: '^prmFullViewServiceContainer'
+      prmFullViewServiceContainer: '^prmFullViewServiceContainer',
+      prmFullView: '^prmFullView',
     },
     // Use the above controller
     controller: 'getitToLinkResolverFullController',

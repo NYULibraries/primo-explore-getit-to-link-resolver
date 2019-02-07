@@ -30,6 +30,17 @@ describe('getitToLinkResolverFullController', () => {
         item: {
           delivery: {}
         }
+      },
+      prmFullView: {
+        services: [
+          { title: 'tab_1.service.fake' },
+          { title: 'tab_2.service.fake' },
+          { title: 'tab_3.service.fake' },
+          { title: 'beforeDetails' },
+          { title: 'brief.results.tabs.details' },
+          { title: 'tab_links.service.fake' },
+          { title: 'tab_virtualbrowse.service.fake' },
+        ]
       }
     };
 
@@ -46,9 +57,31 @@ describe('getitToLinkResolverFullController', () => {
       expect($scope.config).toEqual(getitToLinkResolverConfig);
     });
 
-    it("should assign shouldAddGetItLink function when in the 'send to' section", () => {
+    it("should assign shouldAddGetItLink to false if not tab before details section", () => {
       const sendToBindings = angular.copy(emptyBindings);
-      sendToBindings.prmFullViewServiceContainer.service.title = "nui.brief.results.tabs.links";
+      sendToBindings.prmFullViewServiceContainer.service.title = "brief.results.tabs.details";
+
+      controller.$onInit();
+      expect($scope.shouldAddGetItLink).toBeDefined();
+      expect($scope.shouldAddGetItLink).toBe(false);
+
+      console.log(sendToBindings);
+
+      const $sendToScope = $scope.$new();
+      const controllerInSendTo = $componentController(
+        'getitToLinkResolverFull',
+        { $scope: $sendToScope },
+        sendToBindings
+      );
+
+      controllerInSendTo.$onInit();
+      expect($sendToScope.shouldAddGetItLink).toBeDefined();
+      expect($sendToScope.shouldAddGetItLink).toBe(false);
+    });
+
+    it("should assign shouldAddGetItLink to true if tab before details section", () => {
+      const sendToBindings = angular.copy(emptyBindings);
+      sendToBindings.prmFullViewServiceContainer.service.title = "beforeDetails";
 
       controller.$onInit();
       expect($scope.shouldAddGetItLink).toBeDefined();
