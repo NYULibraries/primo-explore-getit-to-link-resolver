@@ -1,4 +1,4 @@
-<div ng-if="shouldAddGetItLink">
+<div ng-if="shouldAddGetItLink" class="getit-to-link-resolver-full-container">
   <div class="section-head">
     <div layout="row" layout-align="center center" class="layout-align-center-center layout-row">
       <h4 class="section-title md-title light-text">{{translate(config.serviceSectionHeader)}}</h4>
@@ -6,11 +6,18 @@
     </div>
   </div>
   <div class="section-body">
-    <a ng-href="{{ getitLink }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
-      <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
-      {{ translate(config.linkText) }}
-      <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
-      <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
-    </a>
+    <div layout="row" class="bar alert-bar zero-margin-bottom layout-align-center-center layout-row" layout-align="center center">
+      <span class="bar-text margin-right-small">
+        This is an older feature we're planning to retire due to performance issues. This feature will open in a new window.
+      </span>
+    </div>
+    <div class="getit-link-container">
+      <a ng-href="{{ getitLink }}" class="neutralized-button md-button md-primoExplore-theme md-ink-ripple arrow-link check-avail-link check-avail-link-full" target="_blank">
+        <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconBefore.set}}" icon-definition="{{config.iconBefore.icon}}"></prm-icon>
+        {{ translate(config.linkText) }}
+        <prm-icon style="z-index:1" icon-type="svg" svg-icon-set="{{config.iconAfter.set}}" icon-definition="{{config.iconAfter.icon}}"></prm-icon>
+        <prm-icon link-arrow="" icon-type="svg" svg-icon-set="primo-ui" icon-definition="chevron-right"></prm-icon>
+      </a>
+    </div>
   </div>
 </div>

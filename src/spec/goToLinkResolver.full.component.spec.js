@@ -26,13 +26,26 @@ describe('getitToLinkResolverFull component', () => {
 
     const parentCtrl = {
       service: {
-        title: "nui.brief.results.tabs.send_to"
+        title: "beforeDetails"
       }
+    };
+
+    const prmFullViewCtrl = {
+      services: [
+        { title: 'tab_1.service.fake' },
+        { title: 'tab_2.service.fake' },
+        { title: 'tab_3.service.fake' },
+        { title: 'beforeDetails' },
+        { title: 'brief.results.tabs.details' },
+        { title: 'tab_links.service.fake' },
+        { title: 'tab_virtualbrowse.service.fake' },
+      ]
     };
 
     // can add spyOn to parentController to mock parent functions. E.g. spyOn(fooController, 'add').andReturn(3);
     element = angular.element(`<div><getit-to-link-resolver-full /></div>`);
     element.data('$prmFullViewServiceContainerController', parentCtrl);
+    element.data('$prmFullViewController', prmFullViewCtrl);
 
     element = $compile(element)($scope).find('getit-to-link-resolver-full');
     $scope.$digest();
