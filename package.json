@@ -1,6 +1,6 @@
 {
   "name": "primo-explore-getit-to-link-resolver",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "ExLibris Primo New UI plugin for hiding availability links and replacing them with a configurable link to your link resolver",
   "main": "./dist/index.js",
   "repository": {
