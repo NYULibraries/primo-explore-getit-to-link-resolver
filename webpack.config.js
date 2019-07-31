@@ -22,7 +22,7 @@ const webpackConfig = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js',
-    library: 'primoExploreCustomNoSearchResults',
+    library: 'primoExploreGetitToLinkResolver',
     libraryTarget: 'umd',
     libraryExport: 'default',
     // see: https://github.com/webpack/webpack/issues/6522
