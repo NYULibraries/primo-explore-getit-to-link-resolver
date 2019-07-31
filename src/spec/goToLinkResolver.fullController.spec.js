@@ -1,4 +1,4 @@
-const getitToLinkResolverConfig = __fixtures__['getitToLinkResolverConfig'];
+import getitToLinkResolverConfig from './fixtures/getitToLinkResolverConfig';
 
 describe('getitToLinkResolverFullController', () => {
   let $componentController, $scope;
